@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, ForeignKey
 from uuid import uuid4
 from .database import Base
 
@@ -14,7 +14,8 @@ class Project(Base):
     __tablename__ = "projects"
 
     id = Column(String, primary_key=True, default=lambda: str(uuid4()))
-    owner_email = Column(String)
     name = Column(String)
     personas = Column(String)
     status = Column(String, default="CREATED")
+
+    user_id = Column(String, ForeignKey("users.id"))
